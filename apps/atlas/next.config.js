@@ -141,6 +141,7 @@ const nextConfig = {
     domains: [
       'd23fdhqc1jb9no.cloudfront.net',
       'realms-assets.s3.eu-west-3.amazonaws.com',
+      '202.172.56.233',
     ],
     remotePatterns: [
       {

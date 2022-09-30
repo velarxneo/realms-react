@@ -11,6 +11,7 @@ import Laurel from '@bibliotheca-dao/ui-lib/icons/laurel.svg';
 import Library from '@bibliotheca-dao/ui-lib/icons/library.svg';
 import Lords from '@bibliotheca-dao/ui-lib/icons/lords-icon.svg';
 import Menu from '@bibliotheca-dao/ui-lib/icons/menu.svg';
+import Monster from '@bibliotheca-dao/ui-lib/icons/monster.svg';
 import Sword from '@bibliotheca-dao/ui-lib/icons/sword.svg';
 import { animated, useSpring } from '@react-spring/web';
 import Link from 'next/link';
@@ -67,6 +68,11 @@ export const MenuSideBar = () => {
         page: 'realm',
         icon: <Castle className={`${iconClasses('realm')}`} />,
         text: 'Realms',
+      },
+      {
+        page: 'monster',
+        icon: <Monster className={`${iconClasses('monster')}`} />,
+        text: 'Monsters',
       },
       {
         page: 'bank',

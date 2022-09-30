@@ -12,6 +12,7 @@ import Building from '@/abi/settling/L03_Building.json';
 import Calculator from '@/abi/settling/L04_Calculator.json';
 import Wonder from '@/abi/settling/L05_Wonders.json';
 import Lords from '@/abi/settling/Lords_ERC20_Mintable.json';
+import Monster from '@/abi/settling/Monsters_ERC721_Mintable.json';
 import Realms721 from '@/abi/settling/Realms_ERC721_Mintable.json';
 import Relics from '@/abi/settling/Relics.json';
 import Resources1155 from '@/abi/settling/Resources_ERC1155_Mintable_Burnable.json';
@@ -44,6 +45,7 @@ export const ModuleAddr = {
   Calculator:
     '0x05a74143789f2b8d2a95234318d7072062e449d37f9e882af68af663f9078ef7',
   Travel: '0x05f273c4a45dab6e8112e2370bd84f58cfd2f1ff83752c2582241c0c0acba9be',
+  Monster: '0x0343cc06b2a1a786da07355e8b3365c2729efd4ed4c185316f08b33d0e4e5b23',
 };
 
 /**
@@ -206,5 +208,12 @@ export function useExchangeContract() {
   return useContract({
     abi: Exchange as Abi,
     address: ModuleAddr.Exchange,
+  });
+}
+
+export function useMonsterContract() {
+  return useContract({
+    abi: Monster as Abi,
+    address: ModuleAddr.Monster,
   });
 }

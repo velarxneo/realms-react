@@ -867,6 +867,8 @@ export type Query = {
   getRealmCombatResult: CombatResult;
   getRealmHistory: Array<RealmHistory>;
   getRealms: Array<Realm>;
+  getMonster: Monster;
+  getMonsters: Array<Monster>;
   getResource: Resource;
   getResources: Array<Resource>;
   getResourcesByAddress: Array<Resource>;
@@ -878,6 +880,8 @@ export type Query = {
   realmHistory: Array<RealmHistory>;
   realms: Array<Realm>;
   realmsCount: Scalars['Int'];
+  monster: Monster;
+  monsters: Array<Monster>;
   travels: Array<Travel>;
   troopStats: Array<TroopStats>;
 };
@@ -937,6 +941,10 @@ export type QueryGetRealmArgs = {
   realmId: Scalars['Float'];
 };
 
+export type QueryGetMonstermArgs = {
+  monsterId: Scalars['Float'];
+};
+
 export type QueryGetRealmCombatResultArgs = {
   defendRealmId: Scalars['Float'];
   transactionHash: Scalars['String'];
@@ -951,6 +959,13 @@ export type QueryGetRealmHistoryArgs = {
 export type QueryGetRealmsArgs = {
   filter?: InputMaybe<RealmWhereInput>;
   orderBy?: InputMaybe<RealmOrderByInput>;
+  skip?: InputMaybe<Scalars['Float']>;
+  take?: InputMaybe<Scalars['Float']>;
+};
+
+export type QueryGetMonstersArgs = {
+  filter?: InputMaybe<MonsterWhereInput>;
+  // orderBy?: InputMaybe<MonsterOrderByInput>;
   skip?: InputMaybe<Scalars['Float']>;
   take?: InputMaybe<Scalars['Float']>;
 };
@@ -980,6 +995,10 @@ export type QueryRealmArgs = {
   id: Scalars['Float'];
 };
 
+export type QueryMonsterArgs = {
+  id: Scalars['Float'];
+};
+
 export type QueryRealmCombatHistoryArgs = {
   defendRealmId: Scalars['Float'];
   transactionHash: Scalars['String'];
@@ -994,6 +1013,12 @@ export type QueryRealmHistoryArgs = {
 export type QueryRealmsArgs = {
   filter?: InputMaybe<RealmWhereInput>;
   orderBy?: InputMaybe<RealmOrderByWithRelationInput>;
+  skip?: InputMaybe<Scalars['Float']>;
+  take?: InputMaybe<Scalars['Float']>;
+};
+export type QueryMonstersArgs = {
+  // filter?: InputMaybe<MonsterWhereInput>;
+  // orderBy?: InputMaybe<MonsterOrderByWithRelationInput>;
   skip?: InputMaybe<Scalars['Float']>;
   take?: InputMaybe<Scalars['Float']>;
 };
@@ -1045,6 +1070,22 @@ export type Realm = {
   troops?: Maybe<Array<Troop>>;
   wallet?: Maybe<Wallet>;
   wonder?: Maybe<Scalars['String']>;
+};
+
+export type Monster = {
+  __typename?: 'Monster';
+  monsterId?: Maybe<Scalars['Int']>;
+  realmId?: Maybe<Scalars['Int']>;
+  owner?: Maybe<Scalars['String']>;
+  imageUrl?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  monster_class?: Maybe<Scalars['String']>;
+  rarity?: Maybe<Scalars['String']>;
+  level?: Maybe<Scalars['Int']>;
+  xp?: Maybe<Scalars['Int']>;
+  hp?: Maybe<Scalars['Int']>;
+  attack_power?: Maybe<Scalars['Int']>;
+  defence_power?: Maybe<Scalars['Int']>;
 };
 
 /** The Realm History Model */
@@ -1274,13 +1315,27 @@ export type RealmListRelationFilter = {
   some?: InputMaybe<RealmWhereInput>;
 };
 
+export type MonsterListRelationFilter = {
+  every?: InputMaybe<MonsterWhereInput>;
+  none?: InputMaybe<MonsterWhereInput>;
+  some?: InputMaybe<MonsterWhereInput>;
+};
+
 export type RealmOrderByInput = {
   rarityRank?: InputMaybe<OrderByDirectionInput>;
   rarityScore?: InputMaybe<OrderByDirectionInput>;
   realmId?: InputMaybe<OrderByDirectionInput>;
 };
 
+export type MonsterOrderByInput = {
+  // monsterId?: InputMaybe<OrderByDirectionInput>;
+};
+
 export type RealmOrderByRelationAggregateInput = {
+  _count?: InputMaybe<SortOrder>;
+};
+
+export type MonsterOrderByRelationAggregateInput = {
   _count?: InputMaybe<SortOrder>;
 };
 
@@ -1312,9 +1367,29 @@ export type RealmOrderByWithRelationInput = {
   wonder?: InputMaybe<SortOrder>;
 };
 
+export type MonsterOrderByWithRelationInput = {
+  monsterId: InputMaybe<SortOrder>;
+  realmId: InputMaybe<SortOrder>;
+  owner?: InputMaybe<SortOrder>;
+  imageUrl?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  monster_class?: InputMaybe<SortOrder>;
+  rarity?: InputMaybe<SortOrder>;
+  level: InputMaybe<SortOrder>;
+  xp: InputMaybe<SortOrder>;
+  hp: InputMaybe<SortOrder>;
+  attack_power: InputMaybe<SortOrder>;
+  defence_power: InputMaybe<SortOrder>;
+};
+
 export type RealmRelationFilter = {
   is?: InputMaybe<RealmWhereInput>;
   isNot?: InputMaybe<RealmWhereInput>;
+};
+
+export type MonsterRelationFilter = {
+  is?: InputMaybe<MonsterWhereInput>;
+  isNot?: InputMaybe<MonsterWhereInput>;
 };
 
 /** Realm Trait Model */
@@ -1383,6 +1458,24 @@ export type RealmWhereInput = {
   traits?: InputMaybe<RealmTraitListRelationFilter>;
   wallet?: InputMaybe<WalletRelationFilter>;
   wonder?: InputMaybe<StringNullableFilter>;
+};
+
+export type MonsterWhereInput = {
+  AND?: InputMaybe<Array<MonsterWhereInput>>;
+  NOT?: InputMaybe<Array<MonsterWhereInput>>;
+  OR?: InputMaybe<Array<MonsterWhereInput>>;
+  monsterId?: InputMaybe<IntFilter>;
+  realmId?: InputMaybe<IntFilter>;
+  owner?: InputMaybe<StringNullableFilter>;
+  imageUrl?: InputMaybe<StringNullableFilter>;
+  name?: InputMaybe<StringNullableFilter>;
+  monster_class?: InputMaybe<StringNullableFilter>;
+  rarity?: InputMaybe<StringNullableFilter>;
+  level?: InputMaybe<IntFilter>;
+  xp?: InputMaybe<IntFilter>;
+  hp?: InputMaybe<IntFilter>;
+  attack_power?: InputMaybe<IntFilter>;
+  defence_power?: InputMaybe<IntFilter>;
 };
 
 /** The Relic Model */
@@ -1924,6 +2017,10 @@ export type GetRealmQueryVariables = Exact<{
   id: Scalars['Float'];
 }>;
 
+export type GetMonsterQueryVariables = Exact<{
+  id: Scalars['Float'];
+}>;
+
 export type GetRealmQuery = {
   __typename?: 'Query';
   realm: {
@@ -2020,6 +2117,25 @@ export type GetRealmQuery = {
       heavyInfantryQty: number;
       heavyInfantryHealth: number;
     }>;
+  };
+};
+
+export type GetMonsterQuery = {
+  __typename?: 'Query';
+  monster: {
+    __typename?: 'Monster';
+    monsterId: number;
+    realmId: number | null;
+    owner?: string | null;
+    imageUrl?: string | null;
+    name?: string | null;
+    monster_class?: string | null;
+    rarity?: string | null;
+    level: number | null;
+    xp: number | null;
+    hp: number | null;
+    attack_power: number | null;
+    defence_power: number | null;
   };
 };
 
@@ -2151,6 +2267,13 @@ export type GetRealmsQueryVariables = Exact<{
   skip?: InputMaybe<Scalars['Float']>;
 }>;
 
+export type GetMonstersQueryVariables = Exact<{
+  // filter?: InputMaybe<MonsterWhereInput>;
+  // orderBy?: InputMaybe<MonsterOrderByWithRelationInput>;
+  take?: InputMaybe<Scalars['Float']>;
+  skip?: InputMaybe<Scalars['Float']>;
+}>;
+
 export type GetRealmsQuery = {
   __typename?: 'Query';
   total: number;
@@ -2248,6 +2371,14 @@ export type GetRealmsQuery = {
       heavyInfantryQty: number;
       heavyInfantryHealth: number;
     }>;
+  }>;
+};
+
+export type GetMonstersQuery = {
+  __typename?: 'Query';
+  getMonsters: Array<{
+    __typename?: 'Monster';
+    monsterId: number;
   }>;
 };
 
@@ -2486,6 +2617,22 @@ export type RealmFragmentFragment = {
     heavyInfantryQty: number;
     heavyInfantryHealth: number;
   }>;
+};
+
+export type MonsterFragmentFragment = {
+  __typename?: 'Monster';
+  monsterId: number;
+  realmId: number;
+  owner?: string | null;
+  imageUrl?: string | null;
+  name?: string | null;
+  monster_class?: string | null;
+  rarity?: string | null;
+  level?: number | null;
+  xp?: number | null;
+  hp?: number | null;
+  attack_power?: number | null;
+  defence_power?: number | null;
 };
 
 export type RealmArmiesFragmentFragment = {
@@ -2730,6 +2877,23 @@ export const RealmFragmentFragmentDoc = gql`
   ${RealmBuildingsFragmentFragmentDoc}
   ${RealmTroopsFragmentFragmentDoc}
   ${RealmArmiesFragmentFragmentDoc}
+`;
+
+export const MonsterFragmentFragmentDoc = gql`
+  fragment MonsterFragment on Monster {
+    monsterId
+    realmId
+    owner
+    imageUrl
+    name
+    monster_class
+    rarity
+    level
+    xp
+    hp
+    attack_power
+    defence_power
+  }
 `;
 export const TravelFragmentFragmentDoc = gql`
   fragment TravelFragment on Travel {
@@ -3209,6 +3373,15 @@ export const GetRealmDocument = gql`
   ${RealmFragmentFragmentDoc}
 `;
 
+export const GetMonsterDocument = gql`
+  query getMonster($id: Float!) @api(name: starkIndexer) {
+    monster(monsterId: $id) {
+      ...MonsterFragment
+    }
+  }
+  ${MonsterFragmentFragmentDoc}
+`;
+
 /**
  * __useGetRealmQuery__
  *
@@ -3234,6 +3407,18 @@ export function useGetRealmQuery(
     options
   );
 }
+export function useGetMonsterQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    GetMonsterQuery,
+    GetMonsterQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetMonsterQuery, GetMonsterQueryVariables>(
+    GetMonsterDocument,
+    options
+  );
+}
 export function useGetRealmLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
     GetRealmQuery,
@@ -3246,13 +3431,33 @@ export function useGetRealmLazyQuery(
     options
   );
 }
+export function useGetMonsterLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetMonsterQuery,
+    GetMonsterQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetMonsterQuery, GetMonsterQueryVariables>(
+    GetMonsterDocument,
+    options
+  );
+}
 export type GetRealmQueryHookResult = ReturnType<typeof useGetRealmQuery>;
+export type GetMonsterQueryHookResult = ReturnType<typeof useGetMonsterQuery>;
 export type GetRealmLazyQueryHookResult = ReturnType<
   typeof useGetRealmLazyQuery
+>;
+export type GetMonsterLazyQueryHookResult = ReturnType<
+  typeof useGetMonsterLazyQuery
 >;
 export type GetRealmQueryResult = Apollo.QueryResult<
   GetRealmQuery,
   GetRealmQueryVariables
+>;
+export type GetMonsterQueryResult = Apollo.QueryResult<
+  GetMonsterQuery,
+  GetMonsterQueryVariables
 >;
 export const GetBuildingsByRealmIdDocument = gql`
   query getBuildingsByRealmId($id: Float!) @api(name: starkIndexer) {
@@ -3637,6 +3842,15 @@ export const GetRealmsDocument = gql`
   ${RealmFragmentFragmentDoc}
 `;
 
+export const GetMonstersDocument = gql`
+  query getMonsters($take: Float, $skip: Float) @api(name: starkIndexer) {
+    getMonsters(take: $take, skip: $skip) {
+      ...MonsterFragment
+    }
+  }
+  ${MonsterFragmentFragmentDoc}
+`;
+
 /**
  * __useGetRealmsQuery__
  *
@@ -3665,6 +3879,18 @@ export function useGetRealmsQuery(
     options
   );
 }
+export function useGetMonstersQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetMonstersQuery,
+    GetMonstersQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetMonstersQuery, GetMonstersQueryVariables>(
+    GetMonstersDocument,
+    options
+  );
+}
 export function useGetRealmsLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
     GetRealmsQuery,
@@ -3677,13 +3903,33 @@ export function useGetRealmsLazyQuery(
     options
   );
 }
+export function useGetMonstersLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetMonstersQuery,
+    GetMonstersQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetMonstersQuery, GetMonstersQueryVariables>(
+    GetMonstersDocument,
+    options
+  );
+}
 export type GetRealmsQueryHookResult = ReturnType<typeof useGetRealmsQuery>;
+export type GetMonstersQueryHookResult = ReturnType<typeof useGetMonstersQuery>;
 export type GetRealmsLazyQueryHookResult = ReturnType<
   typeof useGetRealmsLazyQuery
+>;
+export type GetMonstersLazyQueryHookResult = ReturnType<
+  typeof useGetMonstersLazyQuery
 >;
 export type GetRealmsQueryResult = Apollo.QueryResult<
   GetRealmsQuery,
   GetRealmsQueryVariables
+>;
+export type GetMonstersQueryResult = Apollo.QueryResult<
+  GetMonstersQuery,
+  GetMonstersQueryVariables
 >;
 export const GetRealmsWithTravelsDocument = gql`
   query getRealmsWithTravels(

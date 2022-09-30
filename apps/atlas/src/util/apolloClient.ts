@@ -19,12 +19,12 @@ const APOLLO_ENDPOINTS = {
   goerli: {
     realms:
       'https://api.thegraph.com/subgraphs/name/bibliothecaforadventurers/realms-goerli',
-    starkIndexer: 'https://dev-indexer-gu226.ondigitalocean.app/graphql',
+    starkIndexer: 'http://202.172.56.233:3333/graphql',
     ecosystem:
       'https://api.thegraph.com/subgraphs/name/bibliothecaforadventurers/loot-ecosystem-goerli',
   },
 };
-const network = process.env.NEXT_PUBLIC_NETWORK || 'mainnet';
+const network = process.env.NEXT_PUBLIC_NETWORK || 'goerli';
 
 export default new ApolloClient({
   link: ApolloLink.from([

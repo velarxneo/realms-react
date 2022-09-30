@@ -1,6 +1,10 @@
 import type { ReactElement } from 'react';
 import type { Call as StarknetCall } from 'starknet';
-import type { RealmFragmentFragment, Army } from '@/generated/graphql';
+import type {
+  RealmFragmentFragment,
+  Army,
+  MonsterFragmentFragment,
+} from '@/generated/graphql';
 
 export type GameStatus = 'active' | 'completed' | 'expired';
 
@@ -29,6 +33,21 @@ export interface Realm {
   rarityScore: number;
   rarityRank: number;
   currentOwner: Owner;
+}
+
+export interface Monster {
+  attack_power: number;
+  defence_power: number;
+  hp: number;
+  imageUrl: string;
+  level: number;
+  monsterId: number;
+  monster_class: number;
+  name: string;
+  owner: string;
+  rarity: number;
+  realmId: number;
+  xp: number;
 }
 
 export interface Crypt {
@@ -103,11 +122,24 @@ export interface RealmProps {
   loading: boolean;
   size?: string;
 }
+
+export interface MonsterProps {
+  monster: Monster;
+  loading: boolean;
+  size?: string;
+}
 export interface RealmsCardProps {
   realm: RealmFragmentFragment;
   loading: boolean;
   size?: string;
 }
+
+export interface MonstersCardProps {
+  monster: MonsterFragmentFragment;
+  loading: boolean;
+  size?: string;
+}
+
 export interface CryptProps {
   crypt: Crypt;
   loading: boolean;
@@ -150,6 +182,13 @@ export interface RealmFilters {
   skip?: number;
   orderBy?: string;
   orderDirection?: string;
+}
+
+export interface MonsterFilters {
+  first?: number;
+  skip?: number;
+  // orderBy?: string;
+  // orderDirection?: string;
 }
 
 export interface Queries {

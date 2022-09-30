@@ -4,6 +4,7 @@ import { BagFragment, defaultLoot } from './fragments/loot';
 import { ManaFragment } from './fragments/mana';
 import { RaidResultFragment } from './fragments/raidResults';
 import { RealmFragment, SRealmFragment } from './fragments/realmFragments';
+import { MonsterFragment } from './fragments/monsterFragments';
 import { WalletFragment } from './fragments/wallet';
 
 const getRealmsQuery = gql`
@@ -68,6 +69,47 @@ const getRealmQuery = gql`
     }
   }
 `;
+
+const getMonsterQuery = gql`
+  ${MonsterFragment}
+  query monster($id: String) @api(name: realms) {
+    monster(monsterId: $id) {
+      attack_power
+      defence_power
+      hp
+      imageUrl
+      level
+      monsterId
+      monster_class
+      name
+      owner
+      rarity
+      monsterId
+      xp
+    }
+  }
+`;
+
+const getMonstersQuery = gql`
+  ${MonsterFragment}
+  query monsters($first: Int, $skip: Int) @api(name: ecosystem) {
+    monsters(first: $first, first: $first, skip: $skip) {
+      attack_power
+      defence_power
+      hp
+      imageUrl
+      level
+      monsterId
+      monster_class
+      name
+      owner
+      rarity
+      monsterId
+      xp
+    }
+  }
+`;
+
 const getLootQuery = gql`
   ${BagFragment}
   query loot($id: String) @api(name: ecosystem) {
@@ -335,6 +377,8 @@ const lpIncentivesQuery = gql`
 export {
   getRealmQuery,
   getRealmsQuery,
+  getMonsterQuery,
+  getMonstersQuery,
   getLootQuery,
   getLootsQuery,
   getGAQuery,
