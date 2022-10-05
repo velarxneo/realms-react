@@ -7,9 +7,9 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import type { ReactElement } from 'react';
 import React, { useState } from 'react';
-
 import { findResourceById } from '@/constants/resources';
 import { useAtlasContext } from '@/context/AtlasContext';
+import useMonsterRampage from '@/hooks/settling/useMonsterRampage';
 import { useWalletContext } from '@/hooks/useWalletContext';
 import { DownloadAssets } from '@/shared/DownloadAssets';
 import { isYourMonster } from '@/shared/Getters/Monster';
@@ -44,7 +44,7 @@ export function MonsterOverview(props: MonstersCardProps): ReactElement {
     `data:image/gif;base64,R0lGODlhAQABAPAA${
       triplet(0, r, g) + triplet(b, 255, 255)
     }/yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==`;
-
+  const { initiate_rampage } = useMonsterRampage();
   return (
     <>
       <div className="relative w-auto">
@@ -163,18 +163,14 @@ export function MonsterOverview(props: MonstersCardProps): ReactElement {
           <div className="w-full">
             <Button
               onClick={() => {
-                router.push(
-                  `/Monster/${props.monster.monsterId}?tab=Overview`,
-                  undefined,
-                  { shallow: true }
-                );
+                initiate_rampage(1, 2976, 0, 2976);
               }}
               variant="primary"
               size="xs"
               className="w-full"
             >
               {isYourMonster(props.monster, account, starkAccount || '')
-                ? 'manage'
+                ? 'Attack'
                 : 'details'}
             </Button>
           </div>

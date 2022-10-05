@@ -4,6 +4,7 @@ import { renderTransaction as renderAmmTxs } from '../useSwapResources';
 import { renderTransaction as renderBuildingTxs } from './useBuildings';
 import { renderTransaction as renderCombatTxs } from './useCombat';
 import { renderTransaction as renderFoodTxs } from './useFood';
+import { renderTransaction as renderMonsterRampageTxs } from './useMonsterRampage';
 import { renderTransaction as renderMonsterTxs } from './useMonsters';
 import { renderTransaction as renderResourceTxs } from './useResources';
 import { renderTransaction as renderSettlingTxs } from './useSettling';
@@ -23,6 +24,7 @@ export function getTxRenderConfig(
     ...renderSettlingTxs,
     ...renderTravelTxs,
     ...renderMonsterTxs,
+    ...renderMonsterRampageTxs,
   };
 
   const metadata = tx.metadata;
