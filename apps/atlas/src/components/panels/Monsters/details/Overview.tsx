@@ -163,7 +163,7 @@ export function MonsterOverview(props: MonstersCardProps): ReactElement {
           <div className="w-full">
             <Button
               onClick={() => {
-                initiate_rampage(1, 2976, 0, 2976);
+                initiate_rampage(1, 6565, 0, 6565);
               }}
               variant="primary"
               size="xs"
