@@ -9,15 +9,9 @@ type MonstersFilterProps = {
 
 export function MonstersFilter(props: MonstersFilterProps) {
   const { state, actions } = useMonsterContext();
-
   return (
     <BaseFilter>
-
-      <div className="md:ml-4">
-        <Button variant="outline" size="xs" onClick={actions.clearFilters}>
-          Clear <span className="hidden md:block ml-2">Filters</span>
-        </Button>
-      </div>
+      <div className="md:ml-4"></div>
     </BaseFilter>
   );
 }

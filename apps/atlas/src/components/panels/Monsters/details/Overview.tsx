@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import type { ReactElement } from 'react';
 import React, { useState } from 'react';
+import { monsterInformation } from '@/constants/monster';
 import { findResourceById } from '@/constants/resources';
 import { useAtlasContext } from '@/context/AtlasContext';
 import useMonsterRampage from '@/hooks/settling/useMonsterRampage';
@@ -45,6 +46,9 @@ export function MonsterOverview(props: MonstersCardProps): ReactElement {
       triplet(0, r, g) + triplet(b, 255, 255)
     }/yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==`;
   const { initiate_rampage } = useMonsterRampage();
+  const monsterBaseData = monsterInformation.find(
+    (a) => a.classID === props.monster.monster_class
+  );
   return (
     <>
       <div className="relative w-auto">
@@ -95,7 +99,7 @@ export function MonsterOverview(props: MonstersCardProps): ReactElement {
           <Image
             src={`${props.monster.imageUrl}.png`}
             alt="map"
-            className="w-full mt-4 rounded-xl -scale-x-100"
+            className="w-full mt-4 rounded-xl -scale-x-80"
             width={400}
             placeholder="blur"
             blurDataURL={rgbDataURL(20, 20, 20)}
@@ -112,7 +116,7 @@ export function MonsterOverview(props: MonstersCardProps): ReactElement {
         </span>
         <span>
           Class:
-          <span className="">{props.monster.monster_class}</span>
+          <span className=""> {monsterBaseData?.className}</span>
         </span>
       </div>
       <div className="flex flex-wrap py-2 mb-2 border-t border-b font-display border-white/30">
@@ -128,7 +132,9 @@ export function MonsterOverview(props: MonstersCardProps): ReactElement {
           <span className="self-center ml-2">HP</span>
         </div>
         <div className="z-10 flex px-2 mb-1 mr-4 text-lg uppercase rounded bg-gray-1000">
-          <span className="self-center ml-2">{props.monster.hp}</span>
+          <span className="self-center ml-2">
+            {props.monster.hp} / {monsterBaseData?.baseHP}
+          </span>
         </div>
       </div>
       <div className="flex flex-wrap py-2 mb-2 border-t border-b font-display border-white/30">
@@ -163,7 +169,12 @@ export function MonsterOverview(props: MonstersCardProps): ReactElement {
           <div className="w-full">
             <Button
               onClick={() => {
-                initiate_rampage(1, 6565, 0, 6565);
+                initiate_rampage(
+                  props.monster.monsterId,
+                  props.monster.realmId,
+                  0,
+                  props.monster.realmId
+                );
               }}
               variant="primary"
               size="xs"
@@ -190,11 +201,6 @@ export function MonsterOverview(props: MonstersCardProps): ReactElement {
           </div>
         </div>
       </div>
-      {/* <MarketplaceByPanel
-        id={props.monster.monsterId.toString()}
-        address="0x7afe30cb3e53dba6801aa0ea647a0ecea7cbe18d"
-      /> */}
-      {/* <DownloadAssets id={props.Monster.MonsterId}></DownloadAssets> */}
     </>
   );
 }

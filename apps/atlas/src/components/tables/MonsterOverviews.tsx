@@ -1,10 +1,6 @@
 import { Tooltip } from '@bibliotheca-dao/ui-lib/base/utility';
-import Castle from '@bibliotheca-dao/ui-lib/icons/castle.svg';
-import Globe from '@bibliotheca-dao/ui-lib/icons/globe.svg';
-import Helm from '@bibliotheca-dao/ui-lib/icons/helm.svg';
-import Map from '@bibliotheca-dao/ui-lib/icons/map.svg';
-import Sickle from '@bibliotheca-dao/ui-lib/icons/sickle.svg';
 import React, { createRef, useEffect, useRef, useState } from 'react';
+import { a } from 'react-spring';
 import type { MonsterFragmentFragment } from '@/generated/graphql';
 import { soundSelector, useUiSounds } from '@/hooks/useUiSounds';
 import { MonsterCard } from '../cards/monsters/MonsterCard';
@@ -16,23 +12,19 @@ interface MonsterOverviewsProps {
 
 export function MonsterOverviews(props: MonsterOverviewsProps) {
   const { play } = useUiSounds(soundSelector.pageTurn);
-  const filteredMonsters = props.monsters;
+  const filteredMonsters = props.monsters.filter((a: any) => a.hp > 0);
 
   const cardRefs = useRef<any>([]);
 
-  // useEffect(() => {
-  //   // add or remove refs
-  //   cardRefs.current = Array(filteredMonsters.length)
-  //     .fill({})
-  //     .map((_, i) => cardRefs.current[i] || createRef());
-  // }, [filteredMonsters]);
+  useEffect(() => {
+    // add or remove refs
+    cardRefs.current = Array(filteredMonsters.length)
+      .fill({})
+      .map((_, i) => cardRefs.current[i] || createRef());
+  }, [filteredMonsters]);
 
-  const tabs = [
-    // <Castle key={2} className="self-center w-6 h-6 fill-current" />,
-    // <Sickle key={1} className="self-center w-6 h-6 fill-current" />,
-    // <Globe key={0} className="self-center w-6 h-6 fill-current" />,
-  ];
-  const tabNames = ['Overview', 'Resources', 'Military', 'Farming'];
+  const tabs = [];
+
   return (
     <div>
       <div className="flex justify-center w-full mt-4">

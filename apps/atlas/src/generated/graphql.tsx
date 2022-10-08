@@ -2630,7 +2630,7 @@ export type MonsterFragmentFragment = {
   rarity?: string | null;
   level?: number | null;
   xp?: number | null;
-  hp?: number | null;
+  hp?: number | 0;
   attack_power?: number | null;
   defence_power?: number | null;
 };

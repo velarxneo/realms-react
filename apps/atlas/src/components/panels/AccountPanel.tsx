@@ -163,8 +163,8 @@ export function AccountPanel() {
       </Tabs>
 
       <SettleRealmsSideBar
-        // isOpen={isSettleRealmsSideBarOpen}
-        isOpen={true}
+        isOpen={isSettleRealmsSideBarOpen}
+        // isOpen={true}
         onClose={() => {
           setIsSettleRealmsSideBarOpen(false);
         }}

@@ -5,15 +5,8 @@ import {
   Button,
   Card,
 } from '@bibliotheca-dao/ui-lib';
-// import { Tooltip } from '@bibliotheca-dao/ui-lib/base/utility';
 import Castle from '@bibliotheca-dao/ui-lib/icons/castle.svg';
 import Crown from '@bibliotheca-dao/ui-lib/icons/crown.svg';
-// import Globe from '@bibliotheca-dao/ui-lib/icons/globe.svg';
-// import Library from '@bibliotheca-dao/ui-lib/icons/library.svg';
-// import Monster from '@bibliotheca-dao/ui-lib/icons/monster.svg';
-// import Relic from '@bibliotheca-dao/ui-lib/icons/relic.svg';
-// import Scroll from '@bibliotheca-dao/ui-lib/icons/scroll-svgrepo-com.svg';
-// import Sickle from '@bibliotheca-dao/ui-lib/icons/sickle.svg';
 import { HeartIcon } from '@heroicons/react/20/solid';
 import { useStarknet } from '@starknet-react/core';
 import React, {
@@ -23,12 +16,7 @@ import React, {
   useState,
   useMemo,
 } from 'react';
-import {
-  // MonsterHistory,
-  MonsterOverview,
-  // Travel,
-  // MonsterLore,
-} from '@/components/panels/Monsters/details';
+import { MonsterOverview } from '@/components/panels/Monsters/details';
 import { useMonsterContext } from '@/context/MonsterContext';
 import { useEnsResolver } from '@/hooks/useEnsResolver';
 import { useUiSounds, soundSelector } from '@/hooks/useUiSounds';
@@ -41,8 +29,6 @@ import {
 } from '@/shared/Getters/Monster';
 import { shortenAddressWidth } from '@/util/formatters';
 import type { MonstersCardProps } from '../../../types';
-
-// import { MonsterResources } from '@/components/tables/MonsterResources';
 
 export const MonsterCard = forwardRef<any, MonstersCardProps>(
   (props: MonstersCardProps, ref) => {
@@ -61,34 +47,6 @@ export const MonsterCard = forwardRef<any, MonstersCardProps>(
           label: <Castle className="self-center w-6 h-6 fill-current" />,
           component: <MonsterOverview {...props} />,
         },
-        // {
-        //   label: <Sickle className="self-center w-6 h-6 fill-current" />,
-        //   component: (
-        //     <MonsterResources
-        //       showRaidable
-        //       showClaimable
-        //       monster={props.monster}
-        //       loading={props.loading}
-        //     />
-        //   ),
-        // },
-        // {
-        //   label: <Globe className="self-center w-6 h-6 fill-current" />,
-        //   component: <Travel monster={props.monster} />,
-        // },
-        // {
-        //   label: <Scroll className="self-center w-6 h-6 fill-current" />,
-        //   component: <MonsterHistory monsterId={props.monster.monsterId} />,
-        // },
-        // {
-        //   label: <Library className="self-center w-6 h-6 fill-current" />,
-        //   component: (
-        //     <MonsterLore
-        //       monsterName={props.monster.name || ''}
-        //       monsterId={props.monster.monsterId || 0}
-        //     />
-        //   ),
-        // },
       ],
       [props.monster?.monsterId]
     );
@@ -151,16 +109,9 @@ export const MonsterCard = forwardRef<any, MonstersCardProps>(
               {shortenAddressWidth(props.monster.owner, 6)}
             </h3>
           )}
-          {/* <div className="self-center">
-            <OrderIcon
-              size="md"
-              order={props.monster.orderType.toLowerCase()}
-            />
-          </div> */}
         </div>
 
         <hr className="mt-3 border border-white/30" />
-        {/* <h6>{MonsterStatus(props.monster)}</h6> */}
         <Tabs
           selectedIndex={selectedTab}
           onChange={(index) => pressedTab(index as number)}

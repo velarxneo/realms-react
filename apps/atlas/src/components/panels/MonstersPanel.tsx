@@ -50,12 +50,7 @@ function useMonstersQueryVariables(
     } else {
       // Your monsters
       if (selectedTabIndex === 0) {
-        filter.OR = [
-          { owner: { equals: account?.toLowerCase() } },
-          { bridgedOwner: { equals: account?.toLowerCase() } },
-          { ownerL2: { equals: starknetWallet } },
-          { settledOwner: { equals: starknetWallet } },
-        ];
+        filter.OR = [{ owner: { equals: starknetWallet } }];
       } else if (selectedTabIndex === 2) {
         filter.monsterId = { in: [...state.favouriteMonsters] };
       }
